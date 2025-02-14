@@ -1,0 +1,50 @@
+﻿@model IEnumerable<HouseRentMVC.Controllers.mypost>
+
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary">Search Results</h2>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-info">@ViewBag.Message</div>
+    }
+
+    @if (Model.Any())
+    {
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>House Name</th>
+                    <th>Area</th>
+                    <th>Details</th>
+                    <th>Rent</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="/Images/@item.Image" width="100" height="100" class="img-thumbnail">
+                        </td>
+                        <td>@item.HouseName</td>
+                        <td>@item.AreaName</td>
+                        <td>
+                            @item.Floor Floor, @item.Bedroom Bedrooms,
+                            @(item.Dining ? "Dining" : "No Dining"),
+                            @(item.Drawing ? "Drawing" : "No Drawing"),
+                            @(item.Kitchen ? "Kitchen" : "No Kitchen")
+                        </td>
+                        <td><b>@item.Rent BDT</b></td>
+                        <td>@item.PhoneNumber</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
